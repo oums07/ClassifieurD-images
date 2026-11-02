@@ -2,6 +2,8 @@ from sklearn.datasets import load_digits
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from modele import initialiser_parametres, calculer_scores, softmax, calculer_perte
+from modele import calculer_gradients, entrainer
+
 
 digits = load_digits()
 X = digits.data
@@ -74,3 +76,31 @@ print("Somme :", probabilites[0].sum())
 perte = calculer_perte(probabilites, y_train)
 
 print("\nPerte initiale :", perte)
+
+
+
+gradient_W, gradient_b = calculer_gradients(
+    X_train_std, probabilites, y_train
+)
+
+print("\nDimensions du gradient des poids :", gradient_W.shape)
+print("Dimensions du gradient des biais :", gradient_b.shape)
+
+
+W, b, pertes = entrainer(
+    X_train_std,
+    y_train,
+    pas=0.1,
+    nb_iterations=1000
+)
+
+
+probabilites_finales = softmax(
+    calculer_scores(X_train_std, W, b)
+)
+
+perte_finale = calculer_perte(
+    probabilites_finales, y_train
+)
+
+print("\nPerte finale d'entraînement :", perte_finale)
