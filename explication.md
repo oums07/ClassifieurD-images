@@ -4,20 +4,15 @@
 
 1. Explorer les images et leur répartition  (DONE)
 2. Séparer et standardiser les données  (DONE)
-3. Programmer la régression logistique multi-classe ( DONE)
-4. Entraîner notre modèle avec la descente de gradient (DONE but i didnt test it yet )
-5. Étudier les paramètres sur la validation
+3. Programmer la régression logistique multi-classe (DONE)
+4. Entraîner notre modèle avec la descente de gradient (DONE)
+5. Étudier les paramètres sur la validation (DONE)
 6. Entraîner la régression logistique de scikit-learn
 7. Comparaison des 2 modèles
 8. FACULTATIF: ajouter une régularisation, essayer un autre modèle ou tester sur MNIST
 
 
-
-
-
 **EN GROS IL NOUS RESTE :**
-
-\- Sur la validation : comparer plusieurs pas d’apprentissage et nombres d’itérations pour choisir leurs valeurs.
 
 \- Avec scikit-learn : entraîner le modèle de référence sur les mêmes données.
 
@@ -26,7 +21,6 @@
 \- Analyser les résultats : observer les chiffres confondus, afficher quelques erreurs et discuter des limites.
 
 \- Le poster.
-
 
 
 **L'architecture du projet :**
@@ -153,9 +147,10 @@ C’est cette répétition qui permet au modèle d’apprendre à reconnaître l
 
 
 
+**Résultats des étapes 4 et 5 :**
 
+Le script entraîne le modèle sur 1077 images, choisit ses paramètres parmi 15 combinaisons évaluées sur 360 images de validation, et garde 360 images de test à part. La standardisation est calculée uniquement sur l'entraînement. Avec un pas de 0,1 et 1000 itérations, la perte d'entraînement descend de 2,3026 à 0,0754.
 
+La grille actuelle teste les pas 0,1, 0,2, 0,5, 1 et 2, avec 1000, 3000 et 5000 itérations. Selon la plus faible perte de validation, le meilleur réglage testé est un pas de 1 et 1000 itérations (perte 0,094773, exactitude 96,39 %). La meilleure exactitude observée est 97,22 %, obtenue avec un pas de 0,1 et 3000 itérations ou un pas de 0,2 et 1000 itérations.
 
-
-
-
+La perte indique si le modèle donne une forte probabilité au bon chiffre. L'exactitude indique simplement combien d'images sont bien reconnues. Le meilleur réglage peut donc être différent selon la mesure choisie. Augmenter le pas ou le nombre d'itérations ne garantit pas de reconnaître plus d'images correctement. On choisit le réglage avec les données de validation et on garde les données de test pour la comparaison finale avec scikit-learn.

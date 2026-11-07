@@ -46,7 +46,7 @@ def calculer_gradients(X, probabilites, y):
     return gradient_W, gradient_b
 
 
-def entrainer(X, y, pas=0.1, nb_iterations=1000):
+def entrainer(X, y, pas=0.1, nb_iterations=1000, afficher=True):
     W, b = initialiser_parametres(
         nb_pixels=X.shape[1],
         nb_classes=10
@@ -72,7 +72,7 @@ def entrainer(X, y, pas=0.1, nb_iterations=1000):
         W = W - pas * gradient_W
         b = b - pas * gradient_b
 
-        if iteration % 100 == 0:
+        if afficher and iteration % 100 == 0:
             print(f"Itération {iteration} : perte = {perte:.4f}")
 
     return W, b, pertes
